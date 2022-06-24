@@ -1,3 +1,6 @@
+const jszip = require('./static/jszip.min');
+const epubJS = require('./static/epub.min');
+
 export default `
 <!DOCTYPE html>
   <html>
@@ -5,8 +8,8 @@ export default `
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPUB.js</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+    <script>${jszip}</script>
+    <script>${epubJS}</script>
 
     <style type="text/css">
       body {
