@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import {
   Directions,
@@ -7,8 +7,8 @@ import {
   State,
 } from 'react-native-gesture-handler';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import RNFS from 'react-native-fs';
 import { defaultTheme as initialTheme, ReaderContext } from './context';
-import template from './template';
 import type { ReaderProps } from './types';
 
 export function Reader({
@@ -60,6 +60,8 @@ export function Reader({
     theme,
   } = useContext(ReaderContext);
   const book = useRef<WebView>(null);
+
+  const [template, setTemplate] = useState<string>();
 
   let injectedJS = `
     window.LOCATIONS = ${JSON.stringify(initialLocations)};
@@ -206,6 +208,14 @@ export function Reader({
     if (book.current) registerBook(book.current);
   }, [registerBook]);
 
+  useEffect(() => {
+    if (!template) {
+      RNFS.readFile('./static/template.html', 'utf8').then((i: string) =>
+        setTemplate(i)
+      );
+    }
+  }, [template]);
+
   let lastTap: number | null = null;
   let timer: NodeJS.Timeout;
 
@@ -264,28 +274,29 @@ export function Reader({
                 {renderLoadingComponent()}
               </View>
             )}
-
-            <TouchableWithoutFeedback onPress={handleDoublePress}>
-              <WebView
-                ref={book}
-                source={{ html: template }}
-                showsVerticalScrollIndicator={false}
-                javaScriptEnabled
-                injectedJavaScriptBeforeContentLoaded={injectedJS}
-                originWhitelist={['*']}
-                scrollEnabled={false}
-                mixedContentMode="compatibility"
-                onMessage={onMessage}
-                allowUniversalAccessFromFileURLs={true}
-                allowFileAccessFromFileURLs={true}
-                allowFileAccess
-                style={{
-                  width,
-                  backgroundColor: theme.body.background,
-                  height,
-                }}
-              />
-            </TouchableWithoutFeedback>
+            {template && (
+              <TouchableWithoutFeedback onPress={handleDoublePress}>
+                <WebView
+                  ref={book}
+                  source={{ html: template }}
+                  showsVerticalScrollIndicator={false}
+                  javaScriptEnabled
+                  injectedJavaScriptBeforeContentLoaded={injectedJS}
+                  originWhitelist={['*']}
+                  scrollEnabled={false}
+                  mixedContentMode="compatibility"
+                  onMessage={onMessage}
+                  allowUniversalAccessFromFileURLs={true}
+                  allowFileAccessFromFileURLs={true}
+                  allowFileAccess
+                  style={{
+                    width,
+                    backgroundColor: theme.body.background,
+                    height,
+                  }}
+                />
+              </TouchableWithoutFeedback>
+            )}
           </View>
         </FlingGestureHandler>
       </FlingGestureHandler>
