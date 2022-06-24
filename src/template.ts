@@ -1,5 +1,5 @@
-const jszip = require('./static/jszip.min');
-const epubJS = require('./static/epub.min');
+import jszip from './static/jszip.min';
+import epubjs from './static/epub.min';
 
 export default `
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ export default `
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPUB.js</title>
     <script>${jszip}</script>
-    <script>${epubJS}</script>
+    <script>${epubjs}</script>
 
     <style type="text/css">
       body {
