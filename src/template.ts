@@ -1,5 +1,5 @@
-import jszip from './static/jszip.min';
-import epubjs from './static/epub.min';
+import jszip from './static/jszip';
+import epubjs from './static/epub';
 
 export default `
 <!DOCTYPE html>
