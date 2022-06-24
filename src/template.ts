@@ -1,5 +1,5 @@
-import jszip from './static/jszip';
-import epubjs from './static/epubjs';
+const jszip = require('./static/jszip.txt');
+const epubjs = require('./static/epubjs.txt');
 
 export default `
 <!DOCTYPE html>
