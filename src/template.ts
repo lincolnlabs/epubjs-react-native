@@ -1,15 +1,15 @@
-const jszip = require('./static/jszip.txt');
-const epubjs = require('./static/epubjs.txt');
+// import RNFS from 'react-native-fs';
 
-export default `
-<!DOCTYPE html>
+export default function loadTemplate() {
+  return `
+  <!DOCTYPE html>
   <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPUB.js</title>
-    <script type="text/javascript">${jszip}</script>
-    <script type="text/javascript">${epubjs}</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
 
     <style type="text/css">
       body {
@@ -229,4 +229,6 @@ export default `
     </script>
   </body>
 </html>
-`;
+
+  `;
+}
