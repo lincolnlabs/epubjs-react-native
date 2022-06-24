@@ -10,6 +10,8 @@ import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { defaultTheme as initialTheme, ReaderContext } from './context';
 import template from './template';
 import type { ReaderProps } from './types';
+import jszip from './static/jszip';
+import epubjs from './static/epubjs';
 
 export function Reader({
   src,
@@ -62,6 +64,9 @@ export function Reader({
   const book = useRef<WebView>(null);
 
   let injectedJS = `
+    ${jszip}
+    ${epubjs}
+
     window.LOCATIONS = ${JSON.stringify(initialLocations)};
     window.THEME = ${JSON.stringify(defaultTheme)};
     window.ENABLE_SELECTION = ${enableSelection};

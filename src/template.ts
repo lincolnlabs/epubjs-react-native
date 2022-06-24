@@ -1,6 +1,3 @@
-import jszip from './static/jszip';
-import epubjs from './static/epubjs';
-
 export default `
 <!DOCTYPE html>
   <html>
@@ -8,9 +5,6 @@ export default `
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPUB.js</title>
-    <script>${jszip}</script>
-    <script>${epubjs}</script>
-
     <style type="text/css">
       body {
         margin: 0;
