@@ -64,7 +64,7 @@ export function Reader({
 
   useEffect(() => {
     if (!template) {
-      loadTemplate().then((i) => setTemplate(i));
+      loadTemplate().then((i: string) => setTemplate(i));
     }
   }, [template]);
 

@@ -1,6 +1,6 @@
 // import RNFS from 'react-native-fs';
 
-export default function loadTemplate() {
+export default async function loadTemplate(): Promise<string> {
   return `
   <!DOCTYPE html>
   <html>
